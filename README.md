@@ -1,16 +1,4 @@
 # ESTRUCTURA MVC MINDEF V. 1.0
-
-## ARCHIVO ENV
-
-- `DEBUG_MODE=0`
-- `DB_HOST=192.168.73.30`
-- `DB_SERVICE=1526`
-- `DB_USER=`
-- `DB_PASS=`
-- `DB_SERVER=batzman_tcp`
-- `DB_NAME=mdn_vasquez`
-
-
 ## REQUERIMIENTOS
 
  - PHP V7.2.4 o superior
