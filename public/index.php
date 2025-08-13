@@ -77,13 +77,20 @@ $router->post('/aplicaciones/cambiarEstadoAPI', [AplicacionController::class, 'c
 $router->get('/aplicaciones/buscarEstadisticasAPI', [AplicacionController::class, 'buscarEstadisticasAPI']);
 $router->get('/aplicaciones/buscarUsuariosAPI', [AplicacionController::class, 'buscarUsuariosAPI']);
 
-// Rutas para visitas
+// =====================================
+// RUTAS PARA VISITAS
+// =====================================
+
+// Página de gestión de visitas
 $router->get('/visitas', [VisitaController::class, 'renderizarPagina']);
+
+// APIs de visitas (versión simplificada)
 $router->post('/API/visitas/guardar', [VisitaController::class, 'guardarAPI']);
 $router->get('/API/visitas/buscar', [VisitaController::class, 'buscarAPI']);
-$router->post('/API/visitas/modificar', [VisitaController::class, 'modificarAPI']);
 $router->post('/API/visitas/eliminar', [VisitaController::class, 'eliminarAPI']);
+$router->post('/API/visitas/modificar', [VisitaController::class, 'modificarAPI']);
 $router->get('/API/visitas/estadisticas', [VisitaController::class, 'buscarEstadisticasAPI']);
 $router->get('/API/visitas/aplicaciones', [VisitaController::class, 'buscarAplicacionesAPI']);
+
 
 $router->comprobarRutas();

@@ -188,7 +188,7 @@ const cargarVisitas = async () => {
         } else {
             document.getElementById('contenedor-visitas').innerHTML = `
                 <div class="text-center py-4">
-                    <i class="fas fa-exclamation-circle text-muted" style="font-size: 3rem;"></i>
+                    <i class="bi bi-exclamation-circle-fill text-muted" style="font-size: 3rem;"></i>
                     <div class="mt-2 text-muted">${resultado.mensaje}</div>
                 </div>
             `;
@@ -197,7 +197,7 @@ const cargarVisitas = async () => {
         console.error('Error al cargar visitas:', error);
         document.getElementById('contenedor-visitas').innerHTML = `
             <div class="text-center py-4 text-danger">
-                <i class="fas fa-times-circle" style="font-size: 3rem;"></i>
+                <i class="bi bi-x-circle-fill" style="font-size: 3rem;"></i>
                 <div class="mt-2">Error al cargar las visitas</div>
             </div>
         `;
@@ -211,7 +211,7 @@ const renderizarVisitas = (visitas) => {
     if (visitas.length === 0) {
         contenedor.innerHTML = `
             <div class="text-center py-4">
-                <i class="fas fa-users text-muted" style="font-size: 3rem;"></i>
+                <i class="bi bi-people text-muted" style="font-size: 3rem;"></i>
                 <div class="mt-2 text-muted">No hay visitas registradas</div>
             </div>
         `;
@@ -237,7 +237,7 @@ const renderizarVisitas = (visitas) => {
                         <div>
                             <h6 class="card-title mb-1">${visita.apl_nombre}</h6>
                             <small class="text-muted">
-                                <i class="fas fa-calendar me-1"></i>
+                                <i class="bi bi-calendar-event me-1"></i>
                                 ${fechaFormateada}
                                 ${esHoy ? '<span class="badge bg-primary ms-1">Hoy</span>' : ''}
                             </small>
@@ -284,14 +284,14 @@ const renderizarVisitas = (visitas) => {
                     <div class="mt-2">
                         <div class="btn-group" role="group">
                             <button class="btn btn-sm btn-outline-primary" onclick="verDetalleVisita(${visita.vis_id})" title="Ver detalle">
-                                <i class="fas fa-eye"></i>
+                                <i class="bi bi-eye"></i>
                             </button>
                             ${esHoy ? `
                                 <button class="btn btn-sm btn-outline-warning" onclick="editarVisita(${visita.vis_id})" title="Editar">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="bi bi-pencil"></i>
                                 </button>
                                 <button class="btn btn-sm btn-outline-danger" onclick="eliminarVisita(${visita.vis_id})" title="Eliminar">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             ` : ''}
                         </div>
@@ -376,7 +376,7 @@ const configurarEventListeners = () => {
 // Abrir modal para nueva visita
 const abrirModalNuevaVisita = () => {
     visitaEditando = null;
-    document.getElementById('modalVisitaLabel').innerHTML = '<i class="fas fa-users me-2"></i>Registrar Visita';
+    document.getElementById('modalVisitaLabel').innerHTML = '<i class="bi bi-people-fill me-2"></i>Registrar Visita';
     document.getElementById('formVisita').reset();
     document.getElementById('visita_id').value = '';
     document.getElementById('visita_fecha').value = dayjs().format('YYYY-MM-DD');
@@ -392,7 +392,7 @@ const editarVisita = (id) => {
     if (!visita) return;
     
     visitaEditando = visita;
-    document.getElementById('modalVisitaLabel').innerHTML = '<i class="fas fa-edit me-2"></i>Editar Visita';
+    document.getElementById('modalVisitaLabel').innerHTML = '<i class="bi bi-pencil me-2"></i>Editar Visita';
     
     // Llenar formulario
     document.getElementById('visita_id').value = visita.vis_id;
@@ -420,7 +420,7 @@ const editarVisita = (id) => {
 const guardarVisita = async () => {
     const btnGuardar = document.getElementById('btnGuardarVisita');
     btnGuardar.disabled = true;
-    btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Guardando...';
+    btnGuardar.innerHTML = '<i class="bi bi-arrow-repeat spin me-1"></i>Guardando...';
     
     try {
         const formData = new FormData(document.getElementById('formVisita'));
@@ -465,7 +465,7 @@ const guardarVisita = async () => {
         });
     } finally {
         btnGuardar.disabled = false;
-        btnGuardar.innerHTML = '<i class="fas fa-save me-1"></i>Guardar Visita';
+        btnGuardar.innerHTML = '<i class="bi bi-floppy-fill me-1"></i>Guardar Visita';
     }
 };
 
@@ -533,7 +533,7 @@ const verDetalleVisita = async (id) => {
     
     await Swal.fire({
         ...swalConfig,
-        title: `<i class="fas fa-users me-2"></i>Detalle de Visita`,
+        title: `<i class="bi bi-people-fill me-2"></i>Detalle de Visita`,
         html: contenido,
         width: 600,
         showConfirmButton: true,
@@ -712,7 +712,7 @@ const verEstadisticasDetalladas = async () => {
     
     await Swal.fire({
         ...swalConfig,
-        title: '<i class="fas fa-chart-bar me-2"></i>Estadísticas Detalladas',
+        title: '<i class="bi bi-bar-chart-fill me-2"></i>Estadísticas Detalladas',
         html: contenido,
         width: 700,
         showConfirmButton: true,
