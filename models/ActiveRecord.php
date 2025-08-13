@@ -1,5 +1,7 @@
 <?php
 namespace Model;
+
+use Exception;
 use PDO;
 class ActiveRecord {
 
@@ -48,8 +50,6 @@ class ActiveRecord {
     public static function all() {
         $query = "SELECT * FROM " . static::$tabla;
         $resultado = self::consultarSQL($query);
-
-        // debuguear($resultado);
         return $resultado;
     }
 
@@ -109,15 +109,12 @@ class ActiveRecord {
         $query .= join(", ", array_values($atributos));
         $query .= " ) ";
         
-
-        // debuguear($query);
-
         // Resultado de la consulta
         $resultado = self::$db->exec($query);
 
         return [
            'resultado' =>  $resultado,
-           'id' => self::$db->lastInsertId(static::$tabla)
+           'id' => self::$db->lastInsertId()
         ];
     }
 
@@ -149,8 +146,6 @@ class ActiveRecord {
             $query .= " WHERE " . $id . " = " . self::$db->quote($this->$id) . " ";
             
         }
-
-        // debuguear($query);
 
         $resultado = self::$db->exec($query);
         return [
@@ -184,25 +179,40 @@ class ActiveRecord {
     }
 
     public static function fetchArray($query){
-        $resultado = self::$db->query($query);
-        $respuesta = $resultado->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($respuesta as $value) {
-            $data[] = array_change_key_case( array_map( 'utf8_encode', $value) ); 
+        try {
+            $resultado = self::$db->query($query);
+            $respuesta = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $data = [];
+            if ($respuesta) {
+                foreach ($respuesta as $value) {
+                    $data[] = array_change_key_case( array_map( 'utf8_encode', $value) ); 
+                }
+            }
+            $resultado->closeCursor();
+            return $data;
+        } catch (Exception $e) {
+            error_log("Error en fetchArray: " . $e->getMessage());
+            return [];
         }
-        $resultado->closeCursor();
-        return $data;
     }
 
         
     public static function fetchFirst($query){
-        $resultado = self::$db->query($query);
-        $respuesta = $resultado->fetchAll(PDO::FETCH_ASSOC);
-        $data = [];
-        foreach ($respuesta as $value) {
-            $data[] = array_change_key_case( array_map( 'utf8_encode', $value) ); 
+        try {
+            $resultado = self::$db->query($query);
+            $respuesta = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $data = [];
+            if ($respuesta) {
+                foreach ($respuesta as $value) {
+                    $data[] = array_change_key_case( array_map( 'utf8_encode', $value) ); 
+                }
+            }
+            $resultado->closeCursor();
+            return array_shift($data);
+        } catch (Exception $e) {
+            error_log("Error en fetchFirst: " . $e->getMessage());
+            return null;
         }
-        $resultado->closeCursor();
-        return array_shift($data);
     }
 
     protected static function crearObjeto($registro) {
@@ -218,8 +228,6 @@ class ActiveRecord {
         return $objeto;
     }
 
-
-
     // Identificar y unir los atributos de la BD
     public function atributos() {
         $atributos = [];
@@ -231,14 +239,66 @@ class ActiveRecord {
         return $atributos;
     }
 
-    public function sanitizarAtributos() {
-        $atributos = $this->atributos();
-        $sanitizado = [];
-        foreach($atributos as $key => $value ) {
+
+    public static function validarFecha($fecha) {
+    // Verificar formato YYYY-MM-DD
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        return false;
+    }
+    
+    // Verificar que sea una fecha válida
+    $fecha_parts = explode('-', $fecha);
+    return checkdate($fecha_parts[1], $fecha_parts[2], $fecha_parts[0]);
+}
+
+
+public static function fechaActual() {
+    return date('Y-m-d');
+}
+
+// MÉTODO PARA VERIFICAR SI ES DÍA HÁBIL
+public static function esDiaHabil($fecha = null) {
+    if (!$fecha) {
+        $fecha = self::fechaActual();
+    }
+    
+    $dia_semana = date('N', strtotime($fecha)); // 1=Lunes, 7=Domingo
+    return ($dia_semana >= 1 && $dia_semana <= 5); // Lunes a Viernes
+}
+
+public function sanitizarAtributos() {
+    $atributos = $this->atributos();
+    $sanitizado = [];
+    
+    foreach($atributos as $key => $value ) {
+        // Manejo especial para campos de fecha/hora en Informix
+        if (($key === 'ava_creado_en' || $key === 'ina_creado_en' || 
+             $key === 'apl_creado_en' || strpos($key, '_creado_en') !== false) && empty($value)) {
+            // Para campos de timestamp, usar CURRENT
+            $sanitizado[$key] = 'CURRENT';
+        } elseif (strpos($key, '_fecha') !== false && !empty($value)) {
+            // Para campos de fecha simples, validar formato y usar directamente
+            if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+                // Es una fecha en formato ISO, usar directamente
+                $sanitizado[$key] = "'" . $value . "'";
+            } else {
+                // Si no es formato ISO, intentar convertir
+                $timestamp = strtotime($value);
+                if ($timestamp !== false) {
+                    $sanitizado[$key] = "'" . date('Y-m-d', $timestamp) . "'";
+                } else {
+                    // Si no se puede convertir, usar como está con quote
+                    $sanitizado[$key] = self::$db->quote($value);
+                }
+            }
+        } else {
+            // Para todos los demás campos, usar quote normal
             $sanitizado[$key] = self::$db->quote($value);
         }
-        return $sanitizado;
     }
+    
+    return $sanitizado;
+}
 
     public function sincronizar($args=[]) { 
         foreach($args as $key => $value) {
