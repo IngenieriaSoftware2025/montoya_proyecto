@@ -1,12 +1,13 @@
 <?php 
 require_once __DIR__ . '/../includes/app.php';
 
-
+use Controllers\AplicacionController;
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\AvanceDiarioController;
 use Controllers\DashboardDesarrolladorController;
 use Controllers\InactividadDiariaController;
+use Controllers\VisitaController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -60,16 +61,29 @@ $router->get('/API/inactividad/estadisticas', [InactividadDiariaController::clas
 $router->get('/API/inactividad/verificarEstado', [InactividadDiariaController::class, 'verificarEstadoDiaAPI']);
 
 // =====================================
-// RUTAS PARA APLICACIONES (Si no existen)
+// RUTAS PARA APLICACIONES
 // =====================================
 
-// Página de gestión de aplicaciones (opcional)
 $router->get('/aplicaciones', [AplicacionController::class, 'renderizarPagina']);
 
-// APIs de aplicaciones
-$router->post('/API/aplicaciones/guardar', [AplicacionController::class, 'guardarAPI']);
-$router->get('/API/aplicaciones/buscar', [AplicacionController::class, 'buscarAPI']);
-$router->post('/API/aplicaciones/modificar', [AplicacionController::class, 'modificarAPI']);
-$router->get('/API/aplicaciones/eliminar', [AplicacionController::class, 'eliminarAPI']);
+// APIs para CRUD de aplicaciones
+$router->post('/aplicaciones/guardarAPI', [AplicacionController::class, 'guardarAPI']);
+$router->get('/aplicaciones/buscarAPI', [AplicacionController::class, 'buscarAplicacionesAPI']);
+$router->post('/aplicaciones/modificarAPI', [AplicacionController::class, 'modificarAPI']);
+$router->post('/aplicaciones/eliminarAPI', [AplicacionController::class, 'eliminarAPI']);
+
+// APIs adicionales para aplicaciones
+$router->post('/aplicaciones/cambiarEstadoAPI', [AplicacionController::class, 'cambiarEstadoAPI']);
+$router->get('/aplicaciones/buscarEstadisticasAPI', [AplicacionController::class, 'buscarEstadisticasAPI']);
+$router->get('/aplicaciones/buscarUsuariosAPI', [AplicacionController::class, 'buscarUsuariosAPI']);
+
+// Rutas para visitas
+$router->get('/visitas', [VisitaController::class, 'renderizarPagina']);
+$router->post('/API/visitas/guardar', [VisitaController::class, 'guardarAPI']);
+$router->get('/API/visitas/buscar', [VisitaController::class, 'buscarAPI']);
+$router->post('/API/visitas/modificar', [VisitaController::class, 'modificarAPI']);
+$router->post('/API/visitas/eliminar', [VisitaController::class, 'eliminarAPI']);
+$router->get('/API/visitas/estadisticas', [VisitaController::class, 'buscarEstadisticasAPI']);
+$router->get('/API/visitas/aplicaciones', [VisitaController::class, 'buscarAplicacionesAPI']);
 
 $router->comprobarRutas();

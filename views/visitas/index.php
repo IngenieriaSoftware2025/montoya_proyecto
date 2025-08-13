@@ -80,16 +80,6 @@
         padding: 1.5rem;
     }
 
-    .bg-primary {
-        background: linear-gradient(135deg, var(--accent-primary) 0%, #2563eb 100%) !important;
-        color: white !important;
-    }
-
-    .bg-light {
-        background-color: var(--bg-tertiary) !important;
-        color: var(--text-primary) !important;
-    }
-
     .btn {
         border-radius: 8px !important;
         font-weight: 500;
@@ -115,13 +105,13 @@
     }
 
     .btn-success {
-        background: linear-gradient(135deg, var(--accent-success) 0%, #16a34a 100%) !important;
+        background: linear-gradient(135deg, var(--accent-success) 0%, var(--urban-green) 100%) !important;
         color: white !important;
         box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
     }
 
     .btn-warning {
-        background: linear-gradient(135deg, var(--accent-warning) 0%, #ea580c 100%) !important;
+        background: linear-gradient(135deg, var(--accent-warning) 0%, var(--industrial-orange) 100%) !important;
         color: white !important;
         box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
     }
@@ -198,7 +188,6 @@
         transform: translateY(-1px);
     }
 
-    /* ✅ COLORES DE TEXTO IGUAL AL EJEMPLO */
     .text-primary { color: var(--accent-primary) !important; }
     .text-success { color: var(--accent-success) !important; }
     .text-warning { color: var(--accent-warning) !important; }
@@ -206,7 +195,6 @@
     .text-info { color: #0891b2 !important; }
     .text-muted { color: var(--text-muted) !important; }
 
-    /* ✅ BACKGROUNDS IGUAL AL EJEMPLO */
     .bg-success { background-color: var(--accent-success) !important; }
     .bg-warning { background-color: var(--accent-warning) !important; }
     .bg-danger { background-color: var(--accent-danger) !important; }
@@ -250,152 +238,6 @@
         color: white !important;
         box-shadow: 0 2px 8px rgba(100, 116, 139, 0.3);
     }
-
-    .progress {
-        background: linear-gradient(90deg, var(--concrete-medium) 0%, var(--bg-tertiary) 100%) !important;
-        border-radius: 10px !important;
-        height: 20px !important;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .progress-bar {
-        background: linear-gradient(90deg, var(--accent-success) 0%, var(--urban-green) 50%, var(--accent-primary) 100%) !important;
-        transition: width 0.6s ease;
-        border-radius: 8px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .progress-bar::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-        animation: shine 2s infinite;
-    }
-
-    @keyframes shine {
-        0% { left: -100%; }
-        100% { left: 100%; }
-    }
-
-    .progress-bar.bg-success {
-        background: linear-gradient(90deg, var(--accent-success) 0%, var(--urban-green) 100%) !important;
-    }
-
-    .progress-bar.bg-warning {
-        background: linear-gradient(90deg, var(--accent-warning) 0%, var(--industrial-orange) 100%) !important;
-    }
-
-    .progress-bar.bg-danger {
-        background: linear-gradient(90deg, var(--accent-danger) 0%, #b91c1c 100%) !important;
-    }
-
-    /* Estados del calendario con colores del ejemplo */
-    .calendar-day {
-        aspect-ratio: 1;
-        border: 1px solid var(--border-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        position: relative;
-        min-height: 60px;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-        background-color: var(--bg-secondary);
-        color: var(--text-primary);
-    }
-    
-    .calendar-day:hover {
-        background-color: var(--bg-tertiary);
-        border-color: var(--accent-primary);
-    }
-    
-    .calendar-day.today {
-        background-color: var(--accent-primary);
-        color: white;
-        font-weight: bold;
-        border-color: var(--accent-primary);
-    }
-    
-    .calendar-day.weekend {
-        background-color: var(--bg-primary);
-        color: var(--text-muted);
-    }
-    
-    .calendar-day.has-report {
-        background-color: var(--accent-success);
-        border-color: var(--accent-success);
-        color: white;
-    }
-    
-    .calendar-day.has-inactivity {
-        background-color: var(--accent-warning);
-        border-color: var(--accent-warning);
-        color: white;
-    }
-    
-    .calendar-day.no-report {
-        background-color: var(--accent-danger);
-        border-color: var(--accent-danger);
-        color: white;
-    }
-    
-    .progress-bar-container {
-        height: 20px;
-        background: linear-gradient(90deg, var(--concrete-medium) 0%, var(--bg-tertiary) 100%);
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-        position: relative;
-    }
-    
-    .progress-bar-container .progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, var(--accent-success) 0%, var(--urban-green) 50%, var(--accent-primary) 100%);
-        transition: width 0.6s ease;
-        border-radius: 8px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 600;
-        font-size: 0.8rem;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    }
-    
-    .card-aplicacion {
-        transition: transform 0.2s;
-    }
-    
-    .card-aplicacion:hover {
-        transform: translateY(-2px);
-    }
-    
-    .indicator-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 8px;
-    }
-    
-    .estado-badge {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
-        border-radius: 6px;
-    }
-
-    /* Semáforos con colores del ejemplo */
-    .semaforo-verde { border-left: 5px solid var(--accent-success); }
-    .semaforo-ambar { border-left: 5px solid var(--accent-warning); }
-    .semaforo-rojo { border-left: 5px solid var(--accent-danger); }
 
     .table {
         color: var(--text-primary) !important;
@@ -480,7 +322,6 @@
         font-weight: 500;
     }
 
-    /* Alertas con colores del ejemplo */
     .alert-success {
         background-color: rgba(5, 150, 105, 0.1) !important;
         border-color: var(--accent-success) !important;
@@ -598,6 +439,29 @@
         white-space: nowrap !important;
         border: 0 !important;
     }
+
+    /* Específico para tarjetas de visitas */
+    .card-visita {
+        transition: transform 0.2s;
+    }
+    
+    .card-visita:hover {
+        transform: translateY(-2px);
+    }
+    
+    .conformidad-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+    }
+    
+    .indicator-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
 </style>
 
 <div class="container-fluid py-4">
@@ -608,8 +472,8 @@
                 <div class="card-header bg-primary text-white">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">
-                            <i class="fas fa-chart-line me-2"></i>
-                            Dashboard del Desarrollador
+                            <i class="bi bi-people-fill me-2"></i>
+                            Gestión de Visitas
                         </h4>
                         <div class="text-end">
                             <div class="mb-1">
@@ -626,125 +490,176 @@
     <!-- Resumen rápido -->
     <div class="row mb-4">
         <div class="col-md-3">
-            <div class="card h-100 text-center">
+            <div class="card h-100 text-center border-left-primary">
                 <div class="card-body">
-                    <div class="h2 text-primary mb-1" id="total-apps">0</div>
-                    <div class="text-muted">Total Aplicaciones</div>
+                    <div class="h2 text-primary mb-1" id="total-visitas">0</div>
+                    <div class="text-muted">Total Visitas</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card h-100 text-center">
+            <div class="card h-100 text-center border-left-success">
                 <div class="card-body">
-                    <div class="h2 text-success mb-1" id="apps-progreso">0</div>
-                    <div class="text-muted">En Progreso</div>
+                    <div class="h2 text-success mb-1" id="visitas-conformes">0</div>
+                    <div class="text-muted">Conformes</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card h-100 text-center">
+            <div class="card h-100 text-center border-left-warning">
                 <div class="card-body">
-                    <div class="h2 text-warning mb-1" id="apps-pausadas">0</div>
-                    <div class="text-muted">Pausadas</div>
+                    <div class="h2 text-warning mb-1" id="visitas-no-conformes">0</div>
+                    <div class="text-muted">No Conformes</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card h-100 text-center">
+            <div class="card h-100 text-center border-left-info">
                 <div class="card-body">
-                    <div class="h2 text-info mb-1" id="reportes-semana">0</div>
-                    <div class="text-muted">Reportes esta semana</div>
+                    <div class="h2 text-info mb-1" id="visitas-mes">0</div>
+                    <div class="text-muted">Este Mes</div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <!-- Columna izquierda: Aplicaciones -->
+        <!-- Columna principal: Lista de visitas -->
         <div class="col-lg-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-light">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
-                            <i class="fas fa-tasks me-2"></i>
-                            Mis Aplicaciones
+                            <i class="bi bi-list-ul me-2"></i>
+                            Registro de Visitas
                         </h5>
-                        <button class="btn btn-outline-primary btn-sm" onclick="cargarAplicaciones()">
-                            <i class="fas fa-sync-alt me-1"></i>
-                            Actualizar
-                        </button>
+                        <div>
+                            <button class="btn btn-success btn-sm me-2" onclick="abrirModalNuevaVisita()">
+                                <i class="bi bi-plus-lg me-1"></i>
+                                Nueva Visita
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="cargarVisitas()">
+                                <i class="bi bi-arrow-clockwise me-1"></i>
+                                Actualizar
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="contenedor-aplicaciones">
-                        <!-- Las aplicaciones se cargarán aquí dinámicamente -->
+                    <!-- Filtros -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="filtro-aplicacion" class="form-label">Aplicación</label>
+                            <select class="form-select" id="filtro-aplicacion" onchange="aplicarFiltros()">
+                                <option value="">Todas las aplicaciones</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="filtro-conformidad" class="form-label">Conformidad</label>
+                            <select class="form-select" id="filtro-conformidad" onchange="aplicarFiltros()">
+                                <option value="">Todas</option>
+                                <option value="true">Conformes</option>
+                                <option value="false">No Conformes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="filtro-fecha-inicio" class="form-label">Desde</label>
+                            <input type="date" class="form-control" id="filtro-fecha-inicio" onchange="aplicarFiltros()">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="filtro-fecha-fin" class="form-label">Hasta</label>
+                            <input type="date" class="form-control" id="filtro-fecha-fin" onchange="aplicarFiltros()">
+                        </div>
+                    </div>
+
+                    <div id="contenedor-visitas">
+                        <!-- Las visitas se cargarán aquí dinámicamente -->
                         <div class="text-center py-4">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">Cargando...</span>
                             </div>
-                            <div class="mt-2">Cargando aplicaciones...</div>
+                            <div class="mt-2">Cargando visitas...</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Columna derecha: Calendario y formularios -->
+        <!-- Columna lateral: Estadísticas y acciones rápidas -->
         <div class="col-lg-4">
-            <!-- Calendario -->
+            <!-- Estadísticas -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-light">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">
-                            <i class="fas fa-calendar-alt me-2"></i>
-                            Calendario
-                        </h6>
-                        <div>
-                            <button class="btn btn-outline-secondary btn-sm" onclick="cambiarMes(-1)">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <span id="mes-actual" class="mx-2 fw-bold"></span>
-                            <button class="btn btn-outline-secondary btn-sm" onclick="cambiarMes(1)">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body p-2">
-                    <div id="calendario">
-                        <!-- El calendario se generará aquí -->
-                    </div>
-                    <div class="mt-3">
-                        <div class="row text-center small">
-                            <div class="col">
-                                <span class="indicator-dot" style="background-color: var(--accent-success);"></span>
-                                Con reporte
-                            </div>
-                            <div class="col">
-                                <span class="indicator-dot" style="background-color: var(--accent-warning);"></span>
-                                Justificado
-                            </div>
-                            <div class="col">
-                                <span class="indicator-dot" style="background-color: var(--accent-danger);"></span>
-                                Sin reporte
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel de acción rápida -->
-            <div class="card shadow-sm">
-                <div class="card-header bg-light">
                     <h6 class="mb-0">
-                        <i class="fas fa-bolt me-2"></i>
-                        Acción Rápida - Hoy
+                        <i class="bi bi-pie-chart me-2"></i>
+                        Estadísticas
                     </h6>
                 </div>
                 <div class="card-body">
-                    <div id="panel-accion-rapida">
-                        <div class="text-center py-3">
-                            <div class="text-muted">Selecciona una aplicación para continuar</div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <small class="text-muted">Tasa de Conformidad</small>
+                            <small class="fw-bold" id="tasa-conformidad">0%</small>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" id="barra-conformidad" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="row text-center small">
+                        <div class="col-6">
+                            <div class="text-success fw-bold" id="stat-conformes">0</div>
+                            <div class="text-muted">Conformes</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-warning fw-bold" id="stat-no-conformes">0</div>
+                            <div class="text-muted">No Conformes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones rápidas -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0">
+                        <i class="bi bi-lightning-charge me-2"></i>
+                        Acciones Rápidas
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" onclick="abrirModalNuevaVisita()">
+                            <i class="bi bi-plus-lg me-2"></i>
+                            Registrar Visita
+                        </button>
+                        <button class="btn btn-outline-info" onclick="verEstadisticasDetalladas()">
+                            <i class="bi bi-bar-chart me-2"></i>
+                            Ver Estadísticas
+                        </button>
+                        <button class="btn btn-outline-warning" onclick="verVisitasNoConformes()">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Visitas No Conformes
+                        </button>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-3">
+                        <h6 class="text-muted mb-2">Leyenda</h6>
+                        <div class="small">
+                            <div class="mb-1">
+                                <span class="indicator-dot bg-success"></span>
+                                Conforme
+                            </div>
+                            <div class="mb-1">
+                                <span class="indicator-dot bg-warning"></span>
+                                No Conforme
+                            </div>
+                            <div class="mb-1">
+                                <span class="indicator-dot bg-info"></span>
+                                Con Solución
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -753,85 +668,111 @@
     </div>
 </div>
 
-<!-- Modal para Reporte de Avance -->
-<div class="modal fade" id="modalReporte" tabindex="-1" aria-labelledby="modalReporteLabel" aria-hidden="true">
+<!-- Modal para Nueva/Editar Visita -->
+<div class="modal fade" id="modalVisita" tabindex="-1" aria-labelledby="modalVisitaLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="modalReporteLabel">
-                    <i class="fas fa-chart-bar me-2"></i>
-                    Reporte Diario de Avance
+                <h5 class="modal-title" id="modalVisitaLabel">
+                    <i class="bi bi-people-fill me-2"></i>
+                    Registrar Visita
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="formReporte">
+            <form id="formVisita">
                 <div class="modal-body">
                     <!-- CAMPOS OCULTOS -->
-                    <input type="hidden" id="reporte_apl_id" name="ava_apl_id">
-                    <input type="hidden" id="reporte_usu_id" name="ava_usu_id" value="3">
-                    <input type="hidden" id="reporte_fecha" name="ava_fecha">
-
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Aplicación:</label>
-                        <div id="reporte_app_nombre" class="form-control-plaintext border rounded p-2 bg-light"></div>
-                    </div>
+                    <input type="hidden" id="visita_id" name="vis_id">
+                    <input type="hidden" id="visita_creado_por" name="vis_creado_por" value="1">
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="reporte_porcentaje" class="form-label fw-bold">
-                                Porcentaje de Avance <span class="text-danger">*</span>
+                            <label for="visita_aplicacion" class="form-label fw-bold">
+                                Aplicación <span class="text-danger">*</span>
                             </label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="reporte_porcentaje" name="ava_porcentaje" 
-                                       min="0" max="100" required>
-                                <span class="input-group-text">%</span>
-                            </div>
-                            <div class="form-text">
-                                <span id="porcentaje_anterior_info"></span>
-                            </div>
+                            <select class="form-select" id="visita_aplicacion" name="vis_apl_id" required>
+                                <option value="">Seleccione una aplicación...</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Fecha:</label>
-                            <div class="form-control-plaintext border rounded p-2 bg-light">
-                                <?= date('d/m/Y') ?> (Hoy)
-                            </div>
+                        <div class="col-md-3">
+                            <label for="visita_fecha" class="form-label fw-bold">Fecha</label>
+                            <input type="date" class="form-control" id="visita_fecha" name="vis_fecha" value="<?= date('Y-m-d') ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="visita_hora" class="form-label fw-bold">Hora</label>
+                            <input type="time" class="form-control" id="visita_hora" name="vis_hora" value="<?= date('H:i') ?>">
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="reporte_resumen" class="form-label fw-bold">
-                            Resumen del Trabajo Realizado <span class="text-danger">*</span>
+                        <label for="visita_quien" class="form-label fw-bold">
+                            ¿Quién realizó la visita? <span class="text-danger">*</span>
                         </label>
-                        <textarea class="form-control" id="reporte_resumen" name="ava_resumen" rows="4" 
-                                  placeholder="Describe brevemente las actividades realizadas hoy..." required></textarea>
+                        <input type="text" class="form-control" id="visita_quien" name="vis_quien" 
+                               placeholder="Ej: Coronel Juan Pérez" required>
+                        <div class="form-text">Nombre y grado de la persona que visitó</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="visita_motivo" class="form-label fw-bold">
+                            Motivo de la Visita <span class="text-danger">*</span>
+                        </label>
+                        <textarea class="form-control" id="visita_motivo" name="vis_motivo" rows="3" 
+                                  placeholder="Describa el motivo o propósito de la visita..." required></textarea>
                         <div class="form-text">Mínimo 10 caracteres</div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="reporte_bloqueadores" class="form-label fw-bold">
-                            Bloqueadores o Impedimentos
+                        <label for="visita_procedimiento" class="form-label fw-bold">
+                            Procedimiento Realizado <span class="text-danger">*</span>
                         </label>
-                        <textarea class="form-control" id="reporte_bloqueadores" name="ava_bloqueadores" rows="2" 
-                                  placeholder="Describe cualquier bloqueador que esté afectando el avance (opcional)"></textarea>
+                        <textarea class="form-control" id="visita_procedimiento" name="vis_procedimiento" rows="3" 
+                                  placeholder="Describa qué se hizo durante la visita..." required></textarea>
+                        <div class="form-text">Mínimo 10 caracteres</div>
                     </div>
 
-                    <div class="mb-3" id="contenedor_justificacion" style="display: none;">
-                        <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <strong>Justificación requerida:</strong> El porcentaje actual es menor al anterior.
-                        </div>
-                        <label for="reporte_justificacion" class="form-label fw-bold">
-                            Justificación <span class="text-danger">*</span>
+                    <div class="mb-3">
+                        <label for="visita_solucion" class="form-label fw-bold">
+                            Solución Propuesta/Realizada
                         </label>
-                        <textarea class="form-control" id="reporte_justificacion" name="ava_justificacion" rows="3" 
-                                  placeholder="Explica por qué el porcentaje de avance disminuyó..."></textarea>
+                        <textarea class="form-control" id="visita_solucion" name="vis_solucion" rows="2" 
+                                  placeholder="Describa qué soluciones se propusieron o implementaron (opcional)"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="visita_observacion" class="form-label fw-bold">
+                            Observaciones Adicionales
+                        </label>
+                        <textarea class="form-control" id="visita_observacion" name="vis_observacion" rows="2" 
+                                  placeholder="Cualquier observación adicional relevante (opcional)"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            ¿La visita fue conforme? <span class="text-danger">*</span>
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="vis_conformidad" id="conformidad_si" value="t" checked>
+                            <label class="form-check-label text-success" for="conformidad_si">
+                                <i class="bi bi-check-circle me-1"></i>
+                                Sí, conforme
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="vis_conformidad" id="conformidad_no" value="f">
+                            <label class="form-check-label text-warning" for="conformidad_no">
+                                <i class="bi bi-exclamation-triangle me-1"></i>
+                                No, no conforme
+                            </label>
+                        </div>
+                        <div class="form-text">Indique si la visita fue satisfactoria y cumplió con las expectativas</div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="btnGuardarReporte">
-                        <i class="fas fa-save me-1"></i>
-                        Guardar Reporte
+                    <button type="submit" class="btn btn-primary" id="btnGuardarVisita">
+                        <i class="bi bi-floppy me-1"></i>
+                        Guardar Visita
                     </button>
                 </div>
             </form>
@@ -839,62 +780,4 @@
     </div>
 </div>
 
-<!-- Modal para Justificación de Inactividad -->
-<div class="modal fade" id="modalInactividad" tabindex="-1" aria-labelledby="modalInactividadLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-warning text-dark">
-                <h5 class="modal-title" id="modalInactividadLabel">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    Justificar Inactividad
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="formInactividad">
-                <div class="modal-body">
-                    <!-- CAMPOS OCULTOS -->
-                    <input type="hidden" id="inactividad_apl_id" name="ina_apl_id">
-                    <input type="hidden" id="inactividad_usu_id" name="ina_usu_id" value="3">
-                    <input type="hidden" id="inactividad_fecha" name="ina_fecha">
-
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Aplicación:</label>
-                        <div id="inactividad_app_nombre" class="form-control-plaintext border rounded p-2 bg-light"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="inactividad_tipo" class="form-label fw-bold">
-                            Tipo de Inactividad <span class="text-danger">*</span>
-                        </label>
-                        <select class="form-select" id="inactividad_tipo" name="ina_tipo" required>
-                            <option value="">Seleccione el tipo...</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="inactividad_motivo" class="form-label fw-bold">
-                            Motivo Detallado <span class="text-danger">*</span>
-                        </label>
-                        <textarea class="form-control" id="inactividad_motivo" name="ina_motivo" rows="4" 
-                                  placeholder="Explica detalladamente el motivo de la inactividad..." required></textarea>
-                        <div class="form-text">Mínimo 10 caracteres</div>
-                    </div>
-
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <strong>Importante:</strong> Esta justificación indica que no hubo avance hoy debido a circunstancias específicas.
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-warning" id="btnGuardarInactividad">
-                        <i class="fas fa-save me-1"></i>
-                        Guardar Justificación
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script src="<?= asset('build/js/desarrollador/index.js') ?>"></script>
+<script src="<?= asset('build/js/visitas/index.js') ?>"></script>

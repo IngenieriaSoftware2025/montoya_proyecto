@@ -8,6 +8,35 @@ import 'dayjs/locale/es';
 dayjs.extend(isoWeek);
 dayjs.locale('es');
 
+// Paleta de colores para tema cemento/gris - IGUAL AL EJEMPLO ✅
+const THEME_COLORS = {
+    primary: '#3b82f6',
+    success: '#059669',      // Verde esmeralda - igual al ejemplo
+    warning: '#d97706',      // Naranja tierra - igual al ejemplo
+    danger: '#dc2626',       // Rojo ladrillo - igual al ejemplo
+    secondary: '#475569',
+    
+    // Fondos grises claros
+    bgPrimary: '#f8fafc',    // Gris muy claro - base
+    bgSecondary: '#f1f5f9',  // Gris claro - cards
+    bgTertiary: '#e2e8f0',   // Gris medio - inputs
+    
+    // Textos
+    text: '#1e293b',         // Texto principal oscuro
+    textSecondary: '#475569', // Texto secundario
+    textMuted: '#64748b',    // Texto atenuado
+    
+    border: '#d1d5db',
+    
+    // Colores industriales específicos
+    concreteLight: '#f7f8fc',
+    concreteMedium: '#e5e7eb',
+    concreteDark: '#9ca3af',
+    steelBlue: '#64748b',
+    industrialOrange: '#ea580c',
+    urbanGreen: '#16a34a'
+};
+
 // Variables globales
 let aplicacionesData = [];
 let calendarioData = {};
@@ -25,12 +54,177 @@ const urls = {
     tiposInactividad: '/montoya_proyecto/API/inactividad/tipos'
 };
 
+// Configuración SweetAlert2 con tema cemento
+const swalConfig = {
+    background: THEME_COLORS.bgPrimary,
+    color: THEME_COLORS.text,
+    confirmButtonColor: THEME_COLORS.primary,
+    cancelButtonColor: THEME_COLORS.secondary,
+    customClass: {
+        popup: 'swal-cement-theme',
+        title: 'swal-cement-title',
+        content: 'swal-cement-content',
+        confirmButton: 'btn-cement-theme',
+        cancelButton: 'btn-cement-theme'
+    }
+};
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    aplicarEstilosSwalCemento();
     inicializarDashboard();
     configurarEventListeners();
     cargarTiposInactividad();
 });
+
+// Aplicar estilos cemento a SweetAlert2
+const aplicarEstilosSwalCemento = () => {
+    const style = document.createElement('style');
+    style.textContent = `
+        .swal-cement-theme {
+            background: linear-gradient(145deg, ${THEME_COLORS.bgPrimary} 0%, white 100%) !important;
+            color: ${THEME_COLORS.text} !important;
+            border: 2px solid ${THEME_COLORS.border} !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+            border-radius: 16px !important;
+        }
+        
+        .swal-cement-title {
+            color: ${THEME_COLORS.text} !important;
+            font-weight: 600 !important;
+        }
+        
+        .swal-cement-content {
+            color: ${THEME_COLORS.textSecondary} !important;
+        }
+        
+        .swal2-input, .swal2-textarea, .swal2-select {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 2px solid ${THEME_COLORS.border} !important;
+            color: ${THEME_COLORS.text} !important;
+            border-radius: 10px !important;
+        }
+        
+        .swal2-input:focus, .swal2-textarea:focus, .swal2-select:focus {
+            border-color: ${THEME_COLORS.primary} !important;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        .btn-cement-theme {
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            padding: 0.75rem 1.5rem !important;
+        }
+        
+        /* Estilos para barra de progreso */
+        .progress-bar-container {
+            height: 20px;
+            background: linear-gradient(90deg, ${THEME_COLORS.concreteMedium} 0%, ${THEME_COLORS.bgTertiary} 100%);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .progress-bar-container .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, ${THEME_COLORS.success} 0%, ${THEME_COLORS.urbanGreen} 50%, ${THEME_COLORS.primary} 100%);
+            transition: width 0.6s ease;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        /* Estados del calendario */
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 1px solid ${THEME_COLORS.border};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            min-height: 60px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            background-color: ${THEME_COLORS.bgSecondary};
+            color: ${THEME_COLORS.text};
+        }
+        
+        .calendar-day:hover {
+            background-color: ${THEME_COLORS.bgTertiary};
+            border-color: ${THEME_COLORS.primary};
+        }
+        
+        .calendar-day.today {
+            background-color: ${THEME_COLORS.primary};
+            color: white;
+            font-weight: bold;
+            border-color: ${THEME_COLORS.primary};
+        }
+        
+        .calendar-day.weekend {
+            background-color: ${THEME_COLORS.bgPrimary};
+            color: ${THEME_COLORS.textMuted};
+        }
+        
+        .calendar-day.has-report {
+            background-color: ${THEME_COLORS.success};
+            border-color: ${THEME_COLORS.success};
+            color: white;
+        }
+        
+        .calendar-day.has-inactivity {
+            background-color: ${THEME_COLORS.warning};
+            border-color: ${THEME_COLORS.warning};
+            color: white;
+        }
+        
+        .calendar-day.no-report {
+            background-color: ${THEME_COLORS.danger};
+            border-color: ${THEME_COLORS.danger};
+            color: white;
+        }
+        
+        /* Semáforos */
+        .semaforo-verde { border-left: 5px solid ${THEME_COLORS.success}; }
+        .semaforo-ambar { border-left: 5px solid ${THEME_COLORS.warning}; }
+        .semaforo-rojo { border-left: 5px solid ${THEME_COLORS.danger}; }
+        
+        /* Alertas */
+        .alert-success {
+            background-color: rgba(5, 150, 105, 0.1) !important;
+            border-color: ${THEME_COLORS.success} !important;
+            color: ${THEME_COLORS.success} !important;
+        }
+
+        .alert-warning {
+            background-color: rgba(217, 119, 6, 0.1) !important;
+            border-color: ${THEME_COLORS.warning} !important;
+            color: ${THEME_COLORS.warning} !important;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 38, 38, 0.1) !important;
+            border-color: ${THEME_COLORS.danger} !important;
+            color: ${THEME_COLORS.danger} !important;
+        }
+
+        .alert-info {
+            background-color: rgba(8, 145, 178, 0.1) !important;
+            border-color: #0891b2 !important;
+            color: #0891b2 !important;
+        }
+    `;
+    document.head.appendChild(style);
+};
 
 // Función principal de inicialización
 const inicializarDashboard = async () => {
@@ -84,7 +278,7 @@ const cargarAplicaciones = async () => {
         } else {
             document.getElementById('contenedor-aplicaciones').innerHTML = `
                 <div class="text-center py-4">
-                    <i class="bi bi-exclamation-circle text-muted" style="font-size: 3rem;"></i>
+                    <i class="fas fa-exclamation-circle text-muted" style="font-size: 3rem;"></i>
                     <div class="mt-2 text-muted">${resultado.mensaje}</div>
                 </div>
             `;
@@ -93,21 +287,21 @@ const cargarAplicaciones = async () => {
         console.error('Error al cargar aplicaciones:', error);
         document.getElementById('contenedor-aplicaciones').innerHTML = `
             <div class="text-center py-4 text-danger">
-                <i class="bi bi-x-circle" style="font-size: 3rem;"></i>
+                <i class="fas fa-times-circle" style="font-size: 3rem;"></i>
                 <div class="mt-2">Error al cargar aplicaciones</div>
             </div>
         `;
     }
 };
 
-// Renderizar las aplicaciones
+// Renderizar las aplicaciones con tema cemento
 const renderizarAplicaciones = () => {
     const contenedor = document.getElementById('contenedor-aplicaciones');
     
     if (aplicacionesData.length === 0) {
         contenedor.innerHTML = `
             <div class="text-center py-4">
-                <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+                <i class="fas fa-inbox text-muted" style="font-size: 3rem;"></i>
                 <div class="mt-2 text-muted">No tienes aplicaciones asignadas</div>
             </div>
         `;
@@ -119,24 +313,24 @@ const renderizarAplicaciones = () => {
         const estadoBadge = obtenerBadgeEstado(app.apl_estado);
         const porcentaje = app.ultimo_porcentaje || 0;
         
-        // Iconos de estado para hoy
+        // Iconos de estado para hoy (sin emojis)
         let iconoEstadoHoy = '';
         let textoEstado = '';
         
         if (app.tiene_reporte_hoy) {
-            iconoEstadoHoy = '<i class="bi bi-check-circle-fill text-success" title="Reporte completado"></i>';
-            textoEstado = '✅ Con reporte';
+            iconoEstadoHoy = '<i class="fas fa-check-circle text-success" title="Reporte completado"></i>';
+            textoEstado = 'Con reporte';
         } else if (app.tiene_inactividad_hoy) {
-            iconoEstadoHoy = '<i class="bi bi-exclamation-triangle-fill text-warning" title="Inactividad justificada"></i>';
-            textoEstado = '⚠️ Justificado';
+            iconoEstadoHoy = '<i class="fas fa-exclamation-triangle text-warning" title="Inactividad justificada"></i>';
+            textoEstado = 'Justificado';
         } else {
             const esDiaHabil = dayjs().day() >= 1 && dayjs().day() <= 5;
             if (esDiaHabil && app.apl_estado === 'EN_PROGRESO') {
-                iconoEstadoHoy = '<i class="bi bi-x-circle-fill text-danger" title="Sin reporte"></i>';
-                textoEstado = '❌ Sin reporte';
+                iconoEstadoHoy = '<i class="fas fa-times-circle text-danger" title="Sin reporte"></i>';
+                textoEstado = 'Sin reporte';
             } else {
-                iconoEstadoHoy = '<i class="bi bi-dash-circle-fill text-muted" title="No requerido"></i>';
-                textoEstado = '➖ No requerido';
+                iconoEstadoHoy = '<i class="fas fa-minus-circle text-muted" title="No requerido"></i>';
+                textoEstado = 'No requerido';
             }
         }
         
@@ -156,7 +350,7 @@ const renderizarAplicaciones = () => {
                             <small class="fw-bold">${porcentaje}%</small>
                         </div>
                         <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: ${porcentaje}%"></div>
+                            <div class="progress-bar" style="width: ${porcentaje}%">${porcentaje}%</div>
                         </div>
                     </div>
                     
@@ -198,7 +392,7 @@ const obtenerBadgeEstado = (estado) => {
     return badges[estado] || '<span class="badge bg-secondary estado-badge">Sin estado</span>';
 };
 
-// Generar botones de acción según el estado
+// Generar botones de acción según el estado (sin emojis)
 const generarBotonesAccion = (app) => {
     const hoy = dayjs().format('YYYY-MM-DD');
     const esHoy = dayjs().format('YYYY-MM-DD') === hoy;
@@ -208,43 +402,43 @@ const generarBotonesAccion = (app) => {
     
     botones.push(`
         <button class="btn btn-outline-primary btn-sm" onclick="seleccionarAplicacion(${app.apl_id})">
-            <i class="bi bi-cursor me-1"></i>Seleccionar
+            <i class="fas fa-hand-pointer me-1"></i>Seleccionar
         </button>
     `);
     
     if (app.tiene_reporte_hoy) {
         botones.push(`
             <button class="btn btn-success btn-sm" disabled>
-                <i class="bi bi-check-circle me-1"></i>✅ Reportado hoy
+                <i class="fas fa-check-circle me-1"></i>Reportado hoy
             </button>
         `);
     } else if (app.tiene_inactividad_hoy) {
         botones.push(`
             <button class="btn btn-warning btn-sm" disabled>
-                <i class="bi bi-exclamation-triangle me-1"></i>⚠️ Justificado hoy
+                <i class="fas fa-exclamation-triangle me-1"></i>Justificado hoy
             </button>
         `);
     } else if (esHoy && esDiaHabil && app.apl_estado === 'EN_PROGRESO') {
         botones.push(`
             <div class="btn-group" role="group">
                 <button class="btn btn-success btn-sm" onclick="abrirModalReporte(${app.apl_id})">
-                    <i class="bi bi-clipboard-data me-1"></i>Reportar
+                    <i class="fas fa-chart-bar me-1"></i>Reportar
                 </button>
                 <button class="btn btn-warning btn-sm" onclick="abrirModalInactividad(${app.apl_id})">
-                    <i class="bi bi-exclamation-triangle me-1"></i>Justificar
+                    <i class="fas fa-exclamation-triangle me-1"></i>Justificar
                 </button>
             </div>
         `);
     } else if (!esDiaHabil) {
         botones.push(`
             <button class="btn btn-light btn-sm" disabled>
-                <i class="bi bi-calendar-x me-1"></i>Fin de semana
+                <i class="fas fa-calendar-times me-1"></i>Fin de semana
             </button>
         `);
     } else if (app.apl_estado !== 'EN_PROGRESO') {
         botones.push(`
             <button class="btn btn-secondary btn-sm" disabled>
-                <i class="bi bi-pause-circle me-1"></i>${app.apl_estado}
+                <i class="fas fa-pause-circle me-1"></i>${app.apl_estado}
             </button>
         `);
     }
@@ -268,7 +462,7 @@ const generarCalendario = async () => {
     }
 };
 
-// Renderizar calendario
+// Renderizar calendario con tema cemento
 const renderizarCalendario = () => {
     const mesNombre = dayjs(mesActual).format('MMMM YYYY');
     document.getElementById('mes-actual').textContent = mesNombre;
@@ -367,7 +561,7 @@ const clickDiaCalendario = (fecha) => {
     }
 };
 
-// Mostrar información del día
+// Mostrar información del día (sin emojis)
 const mostrarInfoDia = (fecha) => {
     const diaClickeado = dayjs(fecha);
     const fechaStr = diaClickeado.format('YYYY-MM-DD');
@@ -375,10 +569,10 @@ const mostrarInfoDia = (fecha) => {
     const reportesDelDia = calendarioData.reportes?.filter(r => r.ava_fecha === fechaStr) || [];
     const inactividadesDelDia = calendarioData.inactividades?.filter(i => i.ina_fecha === fechaStr) || [];
     
-    let contenido = `<h6>📅 ${diaClickeado.format('dddd, DD [de] MMMM [de] YYYY')}</h6>`;
+    let contenido = `<h6><i class="fas fa-calendar-alt me-2"></i>${diaClickeado.format('dddd, DD [de] MMMM [de] YYYY')}</h6>`;
     
     if (reportesDelDia.length > 0) {
-        contenido += '<h6 class="text-success mt-3">✅ Reportes:</h6>';
+        contenido += '<h6 class="text-success mt-3"><i class="fas fa-check-circle me-2"></i>Reportes:</h6>';
         reportesDelDia.forEach(reporte => {
             contenido += `
                 <div class="card card-body mb-2">
@@ -390,7 +584,7 @@ const mostrarInfoDia = (fecha) => {
     }
     
     if (inactividadesDelDia.length > 0) {
-        contenido += '<h6 class="text-warning mt-3">⚠️ Inactividades:</h6>';
+        contenido += '<h6 class="text-warning mt-3"><i class="fas fa-exclamation-triangle me-2"></i>Inactividades:</h6>';
         inactividadesDelDia.forEach(inactividad => {
             contenido += `
                 <div class="card card-body mb-2">
@@ -407,6 +601,7 @@ const mostrarInfoDia = (fecha) => {
     }
     
     Swal.fire({
+        ...swalConfig,
         title: 'Información del Día',
         html: contenido,
         width: 600,
@@ -428,7 +623,7 @@ const seleccionarAplicacion = (appId) => {
     }
 };
 
-// Actualizar panel de acción rápida
+// Actualizar panel de acción rápida (sin emojis)
 const actualizarPanelAccionRapida = () => {
     const panel = document.getElementById('panel-accion-rapida');
     
@@ -455,28 +650,28 @@ const actualizarPanelAccionRapida = () => {
     if (!esDiaHabil) {
         html += `
             <div class="text-center py-3">
-                <i class="bi bi-calendar-x text-muted" style="font-size: 2rem;"></i>
+                <i class="fas fa-calendar-times text-muted" style="font-size: 2rem;"></i>
                 <div class="mt-2 text-muted">No es día hábil</div>
             </div>
         `;
     } else if (app.apl_estado !== 'EN_PROGRESO') {
         html += `
             <div class="text-center py-3">
-                <i class="bi bi-pause-circle text-muted" style="font-size: 2rem;"></i>
+                <i class="fas fa-pause-circle text-muted" style="font-size: 2rem;"></i>
                 <div class="mt-2 text-muted">Aplicación ${app.apl_estado.toLowerCase()}</div>
             </div>
         `;
     } else if (app.tiene_reporte_hoy) {
         html += `
             <div class="alert alert-success">
-                <i class="bi bi-check-circle me-2"></i>
+                <i class="fas fa-check-circle me-2"></i>
                 Ya tienes reporte registrado para hoy
             </div>
         `;
     } else if (app.tiene_inactividad_hoy) {
         html += `
             <div class="alert alert-warning">
-                <i class="bi bi-exclamation-triangle me-2"></i>
+                <i class="fas fa-exclamation-triangle me-2"></i>
                 Ya tienes inactividad justificada para hoy
             </div>
         `;
@@ -484,11 +679,11 @@ const actualizarPanelAccionRapida = () => {
         html += `
             <div class="d-grid gap-2">
                 <button class="btn btn-success" onclick="abrirModalReporte(${app.apl_id})">
-                    <i class="bi bi-clipboard-data me-2"></i>
+                    <i class="fas fa-chart-bar me-2"></i>
                     Registrar Avance
                 </button>
                 <button class="btn btn-warning" onclick="abrirModalInactividad(${app.apl_id})">
-                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <i class="fas fa-exclamation-triangle me-2"></i>
                     Justificar Inactividad
                 </button>
             </div>
@@ -498,7 +693,7 @@ const actualizarPanelAccionRapida = () => {
     panel.innerHTML = html;
 };
 
-// Abrir modal de reporte
+// Abrir modal de reporte con estilos cemento
 const abrirModalReporte = (appId) => {
     const app = aplicacionesData.find(a => a.apl_id == appId);
     if (!app) return;
@@ -517,7 +712,7 @@ const abrirModalReporte = (appId) => {
     modal.show();
 };
 
-// Abrir modal de inactividad
+// Abrir modal de inactividad con estilos cemento
 const abrirModalInactividad = (appId) => {
     const app = aplicacionesData.find(a => a.apl_id == appId);
     if (!app) return;
@@ -586,11 +781,11 @@ const configurarEventListeners = () => {
     });
 };
 
-// Guardar reporte
+// Guardar reporte con notificaciones cemento
 const guardarReporte = async () => {
     const btnGuardar = document.getElementById('btnGuardarReporte');
     btnGuardar.disabled = true;
-    btnGuardar.innerHTML = '<i class="bi bi-hourglass me-1"></i>Guardando...';
+    btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Guardando...';
     
     try {
         const formData = new FormData(document.getElementById('formReporte'));
@@ -603,8 +798,9 @@ const guardarReporte = async () => {
         
         if (resultado.codigo === 1) {
             await Swal.fire({
+                ...swalConfig,
                 icon: 'success',
-                title: '¡Reporte guardado!',
+                title: 'Reporte guardado',
                 text: resultado.mensaje,
                 showConfirmButton: true
             });
@@ -615,6 +811,7 @@ const guardarReporte = async () => {
             actualizarPanelAccionRapida();
         } else {
             await Swal.fire({
+                ...swalConfig,
                 icon: 'error',
                 title: 'Error',
                 text: resultado.mensaje,
@@ -624,6 +821,7 @@ const guardarReporte = async () => {
     } catch (error) {
         console.error('Error al guardar reporte:', error);
         await Swal.fire({
+            ...swalConfig,
             icon: 'error',
             title: 'Error',
             text: 'Error al guardar el reporte',
@@ -631,15 +829,15 @@ const guardarReporte = async () => {
         });
     } finally {
         btnGuardar.disabled = false;
-        btnGuardar.innerHTML = '<i class="bi bi-save me-1"></i>Guardar Reporte';
+        btnGuardar.innerHTML = '<i class="fas fa-save me-1"></i>Guardar Reporte';
     }
 };
 
-// Guardar inactividad
+// Guardar inactividad con notificaciones cemento
 const guardarInactividad = async () => {
     const btnGuardar = document.getElementById('btnGuardarInactividad');
     btnGuardar.disabled = true;
-    btnGuardar.innerHTML = '<i class="bi bi-hourglass me-1"></i>Guardando...';
+    btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Guardando...';
     
     try {
         const formData = new FormData(document.getElementById('formInactividad'));
@@ -652,8 +850,9 @@ const guardarInactividad = async () => {
         
         if (resultado.codigo === 1) {
             await Swal.fire({
+                ...swalConfig,
                 icon: 'success',
-                title: '¡Justificación guardada!',
+                title: 'Justificación guardada',
                 text: resultado.mensaje,
                 showConfirmButton: true
             });
@@ -664,6 +863,7 @@ const guardarInactividad = async () => {
             actualizarPanelAccionRapida();
         } else {
             await Swal.fire({
+                ...swalConfig,
                 icon: 'error',
                 title: 'Error',
                 text: resultado.mensaje,
@@ -673,6 +873,7 @@ const guardarInactividad = async () => {
     } catch (error) {
         console.error('Error al guardar justificación:', error);
         await Swal.fire({
+            ...swalConfig,
             icon: 'error',
             title: 'Error',
             text: 'Error al guardar la justificación',
@@ -680,17 +881,22 @@ const guardarInactividad = async () => {
         });
     } finally {
         btnGuardar.disabled = false;
-        btnGuardar.innerHTML = '<i class="bi bi-save me-1"></i>Guardar Justificación';
+        btnGuardar.innerHTML = '<i class="fas fa-save me-1"></i>Guardar Justificación';
     }
 };
 
-// Toast para notificaciones rápidas
+// Toast para notificaciones
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
     timer: 3000,
-    timerProgressBar: true
+    timerProgressBar: true,
+    background: 'white',
+    color: THEME_COLORS.text,
+    customClass: {
+        popup: 'swal-cement-theme'
+    }
 });
 
 // Exponer funciones globales
