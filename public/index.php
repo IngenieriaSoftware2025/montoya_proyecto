@@ -5,7 +5,9 @@ use Controllers\AplicacionController;
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\AvanceDiarioController;
+use Controllers\ComentarioController;
 use Controllers\DashboardDesarrolladorController;
+use Controllers\DashboardGerenteController;
 use Controllers\InactividadDiariaController;
 use Controllers\VisitaController;
 
@@ -92,5 +94,30 @@ $router->post('/API/visitas/modificar', [VisitaController::class, 'modificarAPI'
 $router->get('/API/visitas/estadisticas', [VisitaController::class, 'buscarEstadisticasAPI']);
 $router->get('/API/visitas/aplicaciones', [VisitaController::class, 'buscarAplicacionesAPI']);
 
+// =====================================
+// RUTAS PARA COMENTARIOS
+// =====================================
+
+// Página de gestión de comentarios
+$router->get('/comentarios', [ComentarioController::class, 'renderizarPagina']);
+
+// APIs de comentarios
+$router->post('/API/comentarios/guardar', [ComentarioController::class, 'guardarAPI']);
+$router->get('/API/comentarios/buscar', [ComentarioController::class, 'buscarAPI']);
+$router->post('/API/comentarios/marcarLeido', [ComentarioController::class, 'marcarLeidoAPI']);
+$router->post('/API/comentarios/marcarTodosLeidos', [ComentarioController::class, 'marcarTodosLeidosAPI']);
+$router->post('/API/comentarios/eliminar', [ComentarioController::class, 'eliminarAPI']);
+$router->get('/API/comentarios/estadisticas', [ComentarioController::class, 'obtenerEstadisticasAPI']);
+$router->get('/API/comentarios/aplicaciones', [AplicacionController::class, 'buscarAplicacionesAPI']);
+
+// Página principal del gerente
+$router->get('/gerente', [DashboardGerenteController::class, 'renderizarPagina']);
+
+// APIs del gerente
+$router->get('/API/gerente/resumen', [DashboardGerenteController::class, 'buscarResumenEjecutivoAPI']);
+$router->get('/API/gerente/aplicaciones', [DashboardGerenteController::class, 'buscarAplicacionesCompletas']);
+$router->get('/API/gerente/graficos', [DashboardGerenteController::class, 'buscarDatosGraficosAPI']);
+$router->get('/API/gerente/alertas', [DashboardGerenteController::class, 'buscarAlertasAPI']);
+$router->get('/API/gerente/metricas', [DashboardGerenteController::class, 'buscarMetricasRendimientoAPI']);
 
 $router->comprobarRutas();

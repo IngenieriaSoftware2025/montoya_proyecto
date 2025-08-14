@@ -5,15 +5,17 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/es';
 
 // Configurar dayjs en español y cargar plugin de semana
+//LIBRERIA PARA LOS DIAS EN ESPAÑOL
 dayjs.extend(isoWeek);
 dayjs.locale('es');
 
-// Paleta de colores para tema cemento/gris - IGUAL AL EJEMPLO ✅
+// Paleta de colores para tema cemento/gris
+//UTILIZADA DE PLANTILLA
 const THEME_COLORS = {
     primary: '#3b82f6',
-    success: '#059669',      // Verde esmeralda - igual al ejemplo
-    warning: '#d97706',      // Naranja tierra - igual al ejemplo
-    danger: '#dc2626',       // Rojo ladrillo - igual al ejemplo
+    success: '#059669',      // Verde esmeralda - 
+    warning: '#d97706',      // Naranja tierra - 
+    danger: '#dc2626',       // Rojo ladrillo - 
     secondary: '#475569',
     
     // Fondos grises claros
@@ -55,6 +57,7 @@ const urls = {
 };
 
 // Configuración SweetAlert2 con tema cemento
+//
 const swalConfig = {
     background: THEME_COLORS.bgPrimary,
     color: THEME_COLORS.text,
@@ -78,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Aplicar estilos cemento a SweetAlert2
+
 const aplicarEstilosSwalCemento = () => {
     const style = document.createElement('style');
     style.textContent = `
@@ -392,7 +396,7 @@ const obtenerBadgeEstado = (estado) => {
     return badges[estado] || '<span class="badge bg-secondary estado-badge">Sin estado</span>';
 };
 
-// Generar botones de acción según el estado (sin emojis)
+// Generar botones de acción según el estado
 const generarBotonesAccion = (app) => {
     const hoy = dayjs().format('YYYY-MM-DD');
     const esHoy = dayjs().format('YYYY-MM-DD') === hoy;
@@ -462,7 +466,7 @@ const generarCalendario = async () => {
     }
 };
 
-// Renderizar calendario con tema cemento
+// Renderizar calendario
 const renderizarCalendario = () => {
     const mesNombre = dayjs(mesActual).format('MMMM YYYY');
     document.getElementById('mes-actual').textContent = mesNombre;
@@ -561,7 +565,7 @@ const clickDiaCalendario = (fecha) => {
     }
 };
 
-// Mostrar información del día (sin emojis)
+// Mostrar información del día
 const mostrarInfoDia = (fecha) => {
     const diaClickeado = dayjs(fecha);
     const fechaStr = diaClickeado.format('YYYY-MM-DD');

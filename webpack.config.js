@@ -8,14 +8,23 @@ module.exports = {
     'js/desarrollador/index' : './src/js/desarrollador/index.js',
     'js/aplicaciones/index' : './src/js/aplicaciones/index.js',
     'js/visitas/index' : './src/js/visitas/index.js',
+    'js/comentarios/index' : './src/js/comentarios/index.js',
+    'js/gerente/index' : './src/js/gerente/index.js',
+    //===============================================================
+    //==============================================================
+    // CSS
+    'css/aplicaciones/style' : './src/css/aplicaciones/style.css',
+    'css/comentarios/style' : './src/css/comentarios/style.css',
+    'css/desarrollador/style' : './src/css/desarrollador/style.css',
+    'css/gerente/style' : './src/css/gerente/style.css',
   },
-  output: {
+output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'public/build')
   },
   plugins: [
     new MiniCssExtractPlugin({
-        filename: 'styles.css'
+        filename: '[name].css'  
     })
   ],
   module: {

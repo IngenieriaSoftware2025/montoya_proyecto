@@ -15,6 +15,7 @@ class AvanceDiarioController extends ActiveRecord
     }
 
     // Convertir fecha ISO a formato BD
+    //este med dio mucho error, es facrtible utilzarlo 
     private static function convertirFechaParaBD($fecha_iso)
     {
         if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $fecha_iso, $matches)) {

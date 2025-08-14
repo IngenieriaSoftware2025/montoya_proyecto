@@ -1,0 +1,483 @@
+
+    :root {
+        --bg-primary: #f8fafc;
+        --bg-secondary: #f1f5f9;
+        --bg-tertiary: #e2e8f0;
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --text-muted: #64748b;
+        --accent-primary: #3b82f6;
+        --accent-success: #059669;
+        --accent-warning: #d97706;
+        --accent-danger: #dc2626;
+        --accent-info: #0891b2;
+        --border-color: #d1d5db;
+        --shadow-color: rgba(0, 0, 0, 0.08);
+        --concrete-light: #f7f8fc;
+        --concrete-medium: #e5e7eb;
+        --concrete-dark: #9ca3af;
+        --steel-blue: #64748b;
+        --industrial-orange: #ea580c;
+        --urban-green: #16a34a;
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--concrete-light) 100%) !important;
+        color: var(--text-primary) !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* Cards ejecutivos */
+    .executive-card {
+        background: linear-gradient(145deg, var(--bg-secondary) 0%, white 100%) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 16px !important;
+        box-shadow: 
+            0 4px 6px var(--shadow-color),
+            0 1px 3px rgba(0, 0, 0, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .executive-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 
+            0 10px 25px var(--shadow-color),
+            0 4px 10px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .executive-card .card-header {
+        background: linear-gradient(135deg, var(--concrete-medium) 0%, var(--bg-tertiary) 100%) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        border-radius: 16px 16px 0 0 !important;
+        color: var(--text-primary) !important;
+        padding: 1.5rem;
+        position: relative;
+    }
+
+    .executive-card .card-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent-primary), var(--urban-green), var(--industrial-orange));
+        border-radius: 16px 16px 0 0;
+    }
+
+    /* Métricas principales */
+    .metric-card {
+        border-left: 4px solid var(--accent-primary);
+        transition: all 0.3s ease;
+    }
+
+    .metric-card.success { border-left-color: var(--accent-success); }
+    .metric-card.warning { border-left-color: var(--accent-warning); }
+    .metric-card.danger { border-left-color: var(--accent-danger); }
+    .metric-card.info { border-left-color: var(--accent-info); }
+
+    .metric-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 1.25rem;
+        background: linear-gradient(135deg, var(--accent-primary), #2563eb);
+        color: white;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .metric-icon.success {
+        background: linear-gradient(135deg, var(--accent-success), var(--urban-green));
+        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    }
+
+    .metric-icon.warning {
+        background: linear-gradient(135deg, var(--accent-warning), var(--industrial-orange));
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    }
+
+    .metric-icon.danger {
+        background: linear-gradient(135deg, var(--accent-danger), #b91c1c);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+
+    .metric-icon.info {
+        background: linear-gradient(135deg, var(--accent-info), #0e7490);
+        box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+    }
+
+    .metric-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+    }
+
+    .metric-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .metric-change {
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    /* Tabla ejecutiva */
+    .executive-table {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-color);
+    }
+
+    .executive-table thead th {
+        background: linear-gradient(135deg, var(--text-primary) 0%, #334155 100%);
+        color: white;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        border: none;
+        padding: 1rem 0.75rem;
+    }
+
+    .executive-table tbody tr {
+        transition: all 0.15s ease;
+        border-bottom: 1px solid #f1f5f9;
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    .executive-table tbody tr:hover {
+        background-color: #f8fafc;
+        transform: scale(1.002);
+    }
+
+    /* Semáforos ejecutivos - CORREGIDO */
+    .semaforo-verde {
+        border-left: 5px solid var(--accent-success) !important;
+        background: linear-gradient(90deg, rgba(5, 150, 105, 0.05), transparent);
+    }
+
+    .semaforo-ambar {
+        border-left: 5px solid var(--accent-warning) !important;
+        background: linear-gradient(90deg, rgba(217, 119, 6, 0.05), transparent);
+    }
+
+    .semaforo-rojo {
+        border-left: 5px solid var(--accent-danger) !important;
+        background: linear-gradient(90deg, rgba(220, 38, 38, 0.05), transparent);
+    }
+
+    /* Progreso ejecutivo - CORREGIDO */
+    .executive-progress {
+        height: 8px;
+        border-radius: 4px;
+        background: linear-gradient(90deg, var(--concrete-medium), var(--bg-tertiary));
+        overflow: hidden;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .executive-progress .progress-bar {
+        background: linear-gradient(90deg, var(--accent-success), var(--urban-green)) !important;
+        border-radius: 4px;
+        transition: width 0.6s ease;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: block;
+    }
+
+    .executive-progress .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Badges ejecutivos - CORREGIDO */
+    .executive-badge {
+        padding: 0.35em 0.65em;
+        font-size: 0.75em;
+        font-weight: 600;
+        border-radius: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+    }
+
+    .executive-badge.success {
+        background: linear-gradient(135deg, var(--accent-success), var(--urban-green)) !important;
+        color: white !important;
+    }
+
+    .executive-badge.warning {
+        background: linear-gradient(135deg, var(--accent-warning), var(--industrial-orange)) !important;
+        color: white !important;
+    }
+
+    .executive-badge.danger {
+        background: linear-gradient(135deg, var(--accent-danger), #b91c1c) !important;
+        color: white !important;
+    }
+
+    .executive-badge.info {
+        background: linear-gradient(135deg, var(--accent-info), #0e7490) !important;
+        color: white !important;
+    }
+
+    .executive-badge.secondary {
+        background: linear-gradient(135deg, var(--concrete-dark), var(--steel-blue)) !important;
+        color: white !important;
+    }
+
+    /* Iconos de semáforo - CORREGIDO */
+    .bi-circle-fill.text-success {
+        color: var(--accent-success) !important;
+    }
+
+    .bi-circle-fill.text-warning {
+        color: var(--accent-warning) !important;
+    }
+
+    .bi-circle-fill.text-danger {
+        color: var(--accent-danger) !important;
+    }
+
+    /* Botones ejecutivos */
+    .btn-executive {
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        transition: all 0.15s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-executive:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-executive.primary {
+        background: linear-gradient(135deg, var(--accent-primary), #2563eb);
+        color: white;
+    }
+
+    .btn-executive.success {
+        background: linear-gradient(135deg, var(--accent-success), var(--urban-green));
+        color: white;
+    }
+
+    .btn-executive.warning {
+        background: linear-gradient(135deg, var(--accent-warning), var(--industrial-orange));
+        color: white;
+    }
+
+    /* Alertas ejecutivas */
+    .executive-alert {
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        box-shadow: var(--shadow-color);
+        border-left: 4px solid;
+    }
+
+    .executive-alert.danger {
+        background: linear-gradient(135deg, #fef2f2, #fee2e2);
+        color: var(--accent-danger);
+        border-left-color: var(--accent-danger);
+    }
+
+    .executive-alert.warning {
+        background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        color: var(--accent-warning);
+        border-left-color: var(--accent-warning);
+    }
+
+    .executive-alert.success {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        color: var(--accent-success);
+        border-left-color: var(--accent-success);
+    }
+
+    .executive-alert.info {
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        color: var(--accent-info);
+        border-left-color: var(--accent-info);
+    }
+
+    /* Navegación ejecutiva */
+    .executive-navbar {
+        background: linear-gradient(135deg, var(--accent-primary), #2563eb) !important;
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+
+    /* Loading states */
+    .loading-state {
+        opacity: 0.6;
+        pointer-events: none;
+        position: relative;
+    }
+
+    .loading-state::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2rem;
+        height: 2rem;
+        margin: -1rem 0 0 -1rem;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid var(--accent-primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .metric-value {
+            font-size: 2rem;
+        }
+        
+        .metric-icon {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1rem;
+        }
+    }
+
+    /* Chart containers */
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+
+    .chart-container canvas {
+        border-radius: 8px;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-tertiary);
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--steel-blue);
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-primary);
+    }
+
+    /* Tabla con funcionalidad básica */
+    .table-sortable th {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+    }
+
+    .table-sortable th:hover {
+        background-color: rgba(0,0,0,0.05);
+    }
+
+    .table-sortable th.sorted-asc::after {
+        content: " ↑";
+        position: absolute;
+        right: 8px;
+    }
+
+    .table-sortable th.sorted-desc::after {
+        content: " ↓";
+        position: absolute;
+        right: 8px;
+    }
+
+    .table-filter {
+        margin-bottom: 1rem;
+    }
+
+    .table-pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .pagination-info {
+        color: #6c757d;
+        font-size: 0.875rem;
+    }
+
+    .pagination-controls button {
+        margin: 0 2px;
+        padding: 6px 12px;
+        border: 1px solid #dee2e6;
+        background: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .pagination-controls button:hover:not(:disabled) {
+        background-color: #e9ecef;
+    }
+
+    .pagination-controls button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .pagination-controls button.active {
+        background-color: var(--accent-primary);
+        color: white;
+        border-color: var(--accent-primary);
+    }
+
+    /* Gráficos alternativos */
+    .alternative-chart {
+        padding: 1rem;
+    }
+
+    .alternative-chart .progress {
+        height: 8px;
+        background-color: var(--bg-tertiary);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .alternative-chart .progress-bar {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.6s ease;
+    }
